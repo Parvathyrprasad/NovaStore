@@ -125,6 +125,13 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 
 # Authentication redirects
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in os.environ.get(
+        "DJANGO_CSRF_TRUSTED_ORIGINS", ""
+    ).split(",")
+    if origin.strip()
+]
 LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "/account/"
 LOGOUT_REDIRECT_URL = "/"

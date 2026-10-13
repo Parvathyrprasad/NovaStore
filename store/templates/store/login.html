@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | NovaStore</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
+            margin: 0;
+        }
+        nav {
+            background: white;
+            padding: 20px 8%;
+            border-bottom: 1px solid #ddd;
+        }
+        nav a { color: #1d1d1f; text-decoration: none; font-weight: bold; }
+        .container {
+            max-width: 430px;
+            margin: 45px auto;
+            padding: 30px;
+            box-sizing: border-box;
+            background: white;
+            border-radius: 16px;
+        }
+        input {
+            width: 100%;
+            padding: 11px;
+            margin: 8px 0 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+        }
+        button {
+            width: 100%;
+            padding: 13px;
+            border: 0;
+            border-radius: 25px;
+            background: #0071e3;
+            color: white;
+            cursor: pointer;
+        }
+        .errors { color: #c62828; }
+    </style>
+</head>
+<body>
+    <nav><a href="{% url 'home' %}">NovaStore</a></nav>
+
+    <main class="container">
+        <h1>Welcome back</h1>
+        <p>Sign in to your NovaStore account.</p>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+
+            <label for="{{ form.username.id_for_label }}">Username</label>
+            {{ form.username }}
+
+            <label for="{{ form.password.id_for_label }}">Password</label>
+            {{ form.password }}
+
+            {% for error in form.username.errors %}
+                <p class="errors">{{ error }}</p>
+            {% endfor %}
+            {% for error in form.password.errors %}
+                <p class="errors">{{ error }}</p>
+            {% endfor %}
+
+            <button type="submit">Sign In</button>
+        </form>
+
+        <p>New to NovaStore? <a href="{% url 'register' %}">Create an account</a></p>
+        <p><a href="{% url 'home' %}">Back to Home</a></p>
+    </main>
+</body>
+</html>

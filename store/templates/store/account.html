@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account | NovaStore</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
+        }
+        nav {
+            background: white;
+            padding: 20px 8%;
+            border-bottom: 1px solid #ddd;
+        }
+        nav a { color: #1d1d1f; text-decoration: none; font-weight: bold; }
+        main {
+            max-width: 600px;
+            margin: 45px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 16px;
+        }
+        button {
+            padding: 12px 22px;
+            border: 0;
+            border-radius: 25px;
+            background: #0071e3;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <nav><a href="{% url 'home' %}">NovaStore</a></nav>
+
+    <main>
+        <h1>My Account</h1>
+        <p>Welcome, {{ user.username }}!</p>
+        <p>You are signed in to NovaStore.</p>
+
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <p><a href="{% url 'home' %}">Continue Shopping</a></p>
+
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Sign Out</button>
+        </form>
+    </main>
+</body>
+</html>

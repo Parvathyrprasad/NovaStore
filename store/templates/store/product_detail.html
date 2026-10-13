@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }} | NovaStore</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
+        }
+
+        nav {
+            background: white;
+            padding: 20px 8%;
+            border-bottom: 1px solid #ddd;
+        }
+
+        nav a {
+            color: #1d1d1f;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .product-details {
+            max-width: 950px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 18px;
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .product-details img {
+            width: 100%;
+            max-width: 380px;
+            border-radius: 12px;
+            object-fit: contain;
+        }
+
+        .info {
+            flex: 1;
+            min-width: 230px;
+        }
+
+        .category {
+            color: #777;
+        }
+
+        .price {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 20px;
+            background: #0071e3;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+        }
+
+        @media (max-width: 600px) {
+            .product-details {
+                margin: 20px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="{% url 'home' %}">NovaStore</a>
+    </nav>
+
+    <main class="product-details">
+        {% if product.image_url %}
+            <img src="{{ product.image_url }}" alt="{{ product.name }}">
+        {% endif %}
+
+        <div class="info">
+            <p class="category">{{ product.category.name }}</p>
+
+            <h1>{{ product.name }}</h1>
+
+            <p>{{ product.description }}</p>
+
+            <p class="price">₹{{ product.price }}</p>
+
+            <p>
+                {% if product.stock > 0 %}
+                    In stock: {{ product.stock }}
+                {% else %}
+                    Currently unavailable
+                {% endif %}
+            </p>
+
+            <a href="{% url 'home' %}" class="back-link">
+                Back to Home
+            </a>
+        </div>
+    </main>
+
+</body>
+</html>

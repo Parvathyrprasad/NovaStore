@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | NovaStore</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
+        }
+
+        nav {
+            background: white;
+            padding: 20px 8%;
+            border-bottom: 1px solid #ddd;
+        }
+
+        nav a {
+            color: #1d1d1f;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 430px;
+            margin: 45px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 16px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        input {
+            width: 100%;
+            padding: 11px;
+            margin: 7px 0 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            background: #0071e3;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        .errors {
+            color: #c62828;
+            font-size: 14px;
+        }
+
+        .helptext {
+            display: block;
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                margin: 25px 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="{% url 'home' %}">NovaStore</a>
+    </nav>
+
+    <main class="container">
+        <h1>Create your account</h1>
+        <p>Join NovaStore to explore our collection.</p>
+
+        <form method="post">
+            {% csrf_token %}
+
+            {% for field in form %}
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+
+                {% if field.help_text %}
+                    <small class="helptext">{{ field.help_text|safe }}</small>
+                {% endif %}
+
+                {% for error in field.errors %}
+                    <p class="errors">{{ error }}</p>
+                {% endfor %}
+            {% endfor %}
+
+            {% for error in form.non_field_errors %}
+                <p class="errors">{{ error }}</p>
+            {% endfor %}
+
+            <button type="submit">Create Account</button>
+        </form>
+
+        <p>Already have an account? <a href="{% url 'login' %}">Sign in</a></p>
+        <p><a href="{% url 'home' %}">Back to Home</a></p>
+    </main>
+
+</body>
+</html>

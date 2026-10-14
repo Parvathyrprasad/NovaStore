@@ -143,3 +143,5 @@ if not DEBUG:
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
 EDIRECT_URL = "/"
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"

@@ -11,9 +11,17 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ("name", "category", "price", "stock", "is_featured")
-    list_filter = ("category", "is_featured")
+    list_display = (
+        "name",
+        "category",
+        "price",
+        "stock",
+        "is_featured",
+        "is_active",
+    )
+    list_filter = ("category", "is_featured", "is_active")
     search_fields = ("name",)
+    list_editable = ("is_active",)
 
 
 @admin.register(Banner)

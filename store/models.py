@@ -21,6 +21,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     image_url = models.URLField(blank=True)
     is_featured = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     stock = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -32,6 +33,11 @@ class Banner(models.Model):
     title = models.CharField(max_length=200)
     subtitle = models.CharField(max_length=300, blank=True)
     image_url = models.URLField(blank=True)
+    image = models.ImageField(
+        upload_to="banners/",
+        blank=True,
+        null=True
+    )
     button_text = models.CharField(max_length=50, default="Shop Now")
     button_link = models.CharField(max_length=200, default="/")
     is_active = models.BooleanField(default=True)
